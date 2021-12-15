@@ -7,54 +7,23 @@ Install Plugin:
 
 Init Push on index.js
 
-    function initPush(result) {
+    function call(result) {
         console.log(result);
      };
-     function initError(error) {
+     function callError(error) {
          console.error(error);
      };
-     Push.pushInit(initPush, initError);
-     
-     
-=====================================================     
+     Push.pushInit("APP_ID", call, callError);
 
-
-Add it to you settings.gradle in repositories:
-
-    repositories {
-            google()
-            mavenCentral()
-            maven { url 'https://jitpack.io' }
-    }
-and:
-
-    dependencies {
-        implementation platform('com.google.firebase:firebase-bom:28.3.1')
-        implementation 'com.google.firebase:firebase-messaging-ktx'
-        implementation 'com.github.PushDevonics:push-devonics-cordova:latest version'
-    }
-
-Java:
-
-MainActivity:
-
-    private PushDevonics pushDevonics;
-    
-MainActivity in onCreate():
-
-    pushDevonics = new PushDevonics(getApplicationContext(), "appId");
-
-    // If you need internalId
-    String internalId = pushDevonics.getInternalId();
-    
-    // If you want add tag type String
-    pushDevonics.setTags("key", "value");
-    
-MainActivity in onResume():
-
-    pushDevonics.startSession();
-    pushDevonics.sendIntent(getIntent());
+If you need Push User ID
         
-MainActivity in onDestroy():
+     Push.pushGetUserId(function(result) { console.log(result); }, callError);
 
-    pushDevonics.stopSession();
+If you want add TAG to User
+
+     Push.pushSendTag("KEY", "VALUE", call, callError);
+
+     
+     
+     
+==========================================================================================================
