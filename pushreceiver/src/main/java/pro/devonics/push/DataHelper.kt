@@ -27,14 +27,14 @@ class DataHelper {
         fun startTime() {
             val date = Calendar.getInstance().timeInMillis
             startTime = date
-            Log.d(TAG, "onCreate: startTime = $startTime")
+            //Log.d(TAG, "onCreate: startTime = $startTime")
         }
 
         fun createTransition(pushData: PushData) {
             val pushCache = PushCache()
             val registrationId = pushCache.getRegistrationIdFromPref()
             val transition = registrationId?.let { service.createTransition(it, pushData) }
-            Log.d(TAG, "createTransition: = $transition")
+            //Log.d(TAG, "createTransition: = $transition")
         }
     }
 }

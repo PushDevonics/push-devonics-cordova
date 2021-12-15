@@ -38,9 +38,9 @@ class PushDevonics(context: Context, appId: String) {
 
             val pushData = PushData(pushType, pushId)
             createTransition(pushData)
-            Log.d(TAG, "sendIntent: pushData = $pushData")
-            Log.d(TAG, "pushType: $pushType")
-            Log.d(TAG, "pushId: $pushId")
+            //Log.d(TAG, "sendIntent: pushData = $pushData")
+            //Log.d(TAG, "pushType: $pushType")
+            //Log.d(TAG, "pushId: $pushId")
         }
     }
 
@@ -49,19 +49,19 @@ class PushDevonics(context: Context, appId: String) {
         val pushCache = PushCache()
         var internalId = pushCache.getInternalIdFromPref()
 
-        Log.d(TAG, "getInternalId(): internalId = $internalId")
+        //Log.d(TAG, "getInternalId(): internalId = $internalId")
 
         return internalId
     }
 
     fun startSession() {
-        Log.d(TAG, "startSession: ")
+        //Log.d(TAG, "startSession: ")
         val pushCache = PushCache()
         val registrationId = pushCache.getRegistrationIdFromPref()
 
         if (pushCache.getSubscribeStatusFromPref() == true) {
             val session = registrationId?.let { service.createSession(it) }
-            Log.d(TAG, "subscribeStatus = ${pushCache.getSubscribeStatusFromPref()}")
+            //Log.d(TAG, "subscribeStatus = ${pushCache.getSubscribeStatusFromPref()}")
 
         }
     }
@@ -73,13 +73,13 @@ class PushDevonics(context: Context, appId: String) {
         if (regId != null) {
             val timeData = TimeData(regId, duration)
             service.sendTimeStatistic(timeData)
-            Log.d(TAG, "stopSession: timeData $timeData")
+            //Log.d(TAG, "stopSession: timeData $timeData")
         }
 
-        Log.d(TAG, "stopSession: duration $duration")
-        Log.d(TAG, "stopSession: regId $regId")
+        //Log.d(TAG, "stopSession: duration $duration")
+        //Log.d(TAG, "stopSession: regId $regId")
 
-        Log.d(TAG, "stopSession")
+        //Log.d(TAG, "stopSession")
     }
 
     fun setTags(key: String, value: String) {
@@ -92,7 +92,7 @@ class PushDevonics(context: Context, appId: String) {
             pushCache.saveTagValue(value)
         }
 
-        Log.d(TAG, "setTags: $key : $value")
+        //Log.d(TAG, "setTags: $key : $value")
     }
 
     private fun createInternalId() {
@@ -105,6 +105,6 @@ class PushDevonics(context: Context, appId: String) {
             pushCache.saveInternalId(internalId)
 
         }
-        Log.d(TAG, "createInternalId(): internalId = $internalId")
+        //Log.d(TAG, "createInternalId(): internalId = $internalId")
     }
 }

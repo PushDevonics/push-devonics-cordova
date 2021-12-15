@@ -40,9 +40,9 @@ class ApiHelper(private val apiService: ApiService) {
                         if (registrationId != null) {
                             createSession(registrationId)
 
-                            Log.d(TAG, "createPush.onResponse: registrationId $registrationId")
+                            //Log.d(TAG, "createPush.onResponse: registrationId $registrationId")
                         }
-                        Log.d(TAG, "createPush.onResponse: isSuccessful")
+                        //Log.d(TAG, "createPush.onResponse: isSuccessful")
                     }
                 }
 
@@ -66,7 +66,7 @@ class ApiHelper(private val apiService: ApiService) {
                         val key = pushCache.getTagKey()
                         val value = pushCache.getTagValue()
                         if (!key.equals("") && !value.equals("")) {
-                            Log.d(TAG, "createSession.onResponse: isSuccessful $key $value")
+                            //Log.d(TAG, "createSession.onResponse: isSuccessful $key $value")
                             if (key != null) {
                                 if (value != null) {
                                     saveTag(key, value, registrationId)
@@ -76,14 +76,14 @@ class ApiHelper(private val apiService: ApiService) {
                             }
                         }
                         //if (key!= null && value != null)
-                        Log.d(TAG, "createSession.onResponse: isSuccessful")
+                        //Log.d(TAG, "createSession.onResponse: isSuccessful")
                     } else {
                         createSession(registrationId)
-                        Log.d(TAG, "createSession.onResponse: not")
+                        //Log.d(TAG, "createSession.onResponse: not")
                     }
-                    if (response.code() == 500) {
+                    /*if (response.code() == 500) {
                         Log.d(TAG, "createSession.onResponse: ERROR = 500")
-                    }
+                    }*/
                     //Log.d(TAG, "createSession.onResponse: response = $response")
                 }
 
@@ -120,22 +120,22 @@ class ApiHelper(private val apiService: ApiService) {
         val tag = Tag(key, value, registrationId)
         val call = apiService.saveCustomParams(tag)
 
-        Log.d(TAG, "saveTag: tag = $tag")
+        //Log.d(TAG, "saveTag: tag = $tag")
 
         call.enqueue(
            object : Callback<Tag> {
                override fun onResponse(call: Call<Tag>, response: Response<Tag>) {
-                   if (response.isSuccessful) {
+                   /*if (response.isSuccessful) {
                        Log.d(TAG, "saveTag.onResponse: response.isSuccessful")
                    } else {
                        //saveTag(tag)
                        Log.d(TAG, "saveTag.onResponse: response.notSuccess")
-                   }
-                   Log.d(TAG, "saveTag.onResponse: response = $response")
+                   }*/
+                   //Log.d(TAG, "saveTag.onResponse: response = $response")
                }
 
                override fun onFailure(call: Call<Tag>, t: Throwable) {
-                   Log.d(TAG, "saveTag.onFailure: Throwable = $t")
+                   //Log.d(TAG, "saveTag.onFailure: Throwable = $t")
                }
            }
         )

@@ -65,8 +65,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         intent?.putExtra("push_type", remoteMessage.data["push_type"])
         intent?.putExtra("push_id", remoteMessage.data["push_id"])
 
-        Log.d(TAG, "push_type: ${remoteMessage.data["push_type"]}")
-        Log.d(TAG, "push_id: ${remoteMessage.data["push_id"]}")
+        //Log.d(TAG, "push_type: ${remoteMessage.data["push_type"]}")
+        //Log.d(TAG, "push_id: ${remoteMessage.data["push_id"]}")
         //Log.d(TAG, "push_id: ${remoteMessage.data["push_id"]}")
 
         val image = remoteMessage
@@ -76,11 +76,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val smallIcon = remoteMessage
             .notification?.imageUrl?.let { getBitmapFromUrl(it.toString()) }
 
-        Log.d(TAG, "image: $image")
-        Log.d(TAG, "smallIcon: $smallIcon")
+        //Log.d(TAG, "image: $image")
+        //Log.d(TAG, "smallIcon: $smallIcon")
 
-        Log.d(TAG, "image: ${remoteMessage.data["image"]}")
-        Log.d(TAG, "smallIcon: ${remoteMessage.notification?.imageUrl}")
+        //Log.d(TAG, "image: ${remoteMessage.data["image"]}")
+        //Log.d(TAG, "smallIcon: ${remoteMessage.notification?.imageUrl}")
 
         val rnds = (1..1000).random()
         val pendingIntent = PendingIntent.getActivity(
@@ -173,8 +173,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                     notificationManager.createNotificationChannel(channel)
                 }
                 notificationManager.notify(0, builder.build())
-                Log.d(TAG, "Message Notification Body: ${it.body}")
-                Log.d(TAG, "Message Notification Body icon: ${it.icon}")
+                //Log.d(TAG, "Message Notification Body: ${it.body}")
+                //Log.d(TAG, "Message Notification Body icon: ${it.icon}")
             }
         }
 
@@ -202,8 +202,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                     notificationManager.createNotificationChannel(channel)
                 }
                 notificationManager.notify(0, builder.build())
-                Log.d(TAG, "Message Notification Body: ${it.body}")
-                Log.d(TAG, "Message Notification Body icon: ${it.icon}")
+                //Log.d(TAG, "Message Notification Body: ${it.body}")
+                //Log.d(TAG, "Message Notification Body icon: ${it.icon}")
             }
         }
     }
@@ -220,7 +220,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     @SuppressLint("LongLogTag")
     override fun onNewToken(p0: String) {
-        Log.d(TAG, "################ onNewToken##################: $p0")
+        //Log.d(TAG, "################ onNewToken##################: $p0")
         //super.onNewToken(p0)
 
     }

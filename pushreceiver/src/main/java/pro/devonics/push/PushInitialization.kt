@@ -72,9 +72,9 @@ class PushInitialization {
 
                                         //pushCache.saveSubscribeStatus(true)
                                         //Log.d(TAG, "complete: SubscribeStatus = ${pushCache.getSubscribeStatusFromPref()}")
-                                        Log.d(TAG, "complete: subscribe = $subscribe")
+                                        //Log.d(TAG, "complete: subscribe = $subscribe")
 
-                                        Log.d(TAG, "complete: pushUser = $pushUser")
+                                        //Log.d(TAG, "complete: pushUser = $pushUser")
                                     }
                                 }
 
