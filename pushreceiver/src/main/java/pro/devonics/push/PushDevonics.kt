@@ -24,6 +24,7 @@ class PushDevonics(context: Context, appId: String) {
     init {
         AppContextKeeper.setContext(context)
         PushInitialization.run(appId)
+        createInternalId()
         startTime()
     }
 
@@ -43,17 +44,11 @@ class PushDevonics(context: Context, appId: String) {
         }
     }
 
-    fun getInternalId(): String {
+    fun getInternalId(): String? {
 
         val pushCache = PushCache()
         var internalId = pushCache.getInternalIdFromPref()
 
-        if (internalId == null) {
-            val uuid = UUID.randomUUID()
-            internalId = uuid.toString()
-            pushCache.saveInternalId(internalId)
-
-        }
         Log.d(TAG, "getInternalId(): internalId = $internalId")
 
         return internalId
@@ -98,5 +93,18 @@ class PushDevonics(context: Context, appId: String) {
         }
 
         Log.d(TAG, "setTags: $key : $value")
+    }
+
+    private fun createInternalId() {
+        val pushCache = PushCache()
+
+        var internalId = pushCache.getInternalIdFromPref()
+        if (internalId == null) {
+            val uuid = UUID.randomUUID()
+            internalId = uuid.toString()
+            pushCache.saveInternalId(internalId)
+
+        }
+        Log.d(TAG, "createInternalId(): internalId = $internalId")
     }
 }
