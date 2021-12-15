@@ -1,5 +1,24 @@
 [![Release](https://jitpack.io/v/PushDevonics/push-devonics-cordova.svg)](https://jitpack.io/#PushDevonics/push-devonics-cordova)
 
+
+Install Plugin:
+
+    cordova plugin add cordova-plugin-pushdevonics
+
+Init Push on index.js
+
+    function initPush(result) {
+        console.log(result);
+     };
+     function initError(error) {
+         console.error(error);
+     };
+     Push.pushInit(initPush, initError);
+     
+     
+=====================================================     
+
+
 Add it to you settings.gradle in repositories:
 
     repositories {
