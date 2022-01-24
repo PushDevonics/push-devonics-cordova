@@ -15,6 +15,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import pro.devonics.push.network.ApiHelper
+import pro.devonics.push.network.RetrofitBuilder
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -64,6 +66,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         // Send pushData to intent
         intent?.putExtra("push_type", remoteMessage.data["push_type"])
         intent?.putExtra("push_id", remoteMessage.data["push_id"])
+        intent?.putExtra("deeplink", remoteMessage.data["deeplink"])
 
         //Log.d(TAG, "push_type: ${remoteMessage.data["push_type"]}")
         //Log.d(TAG, "push_id: ${remoteMessage.data["push_id"]}")
@@ -86,12 +89,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val pendingIntent = PendingIntent.getActivity(
             this, rnds, intent, PendingIntent.FLAG_ONE_SHOT)
         val channelId = "Default"
-
-        /*if (remoteMessage.data.isNotEmpty()) {
-            Log.d(TAG, "Message data payload: ${remoteMessage.data}")
-        } else {
-            Log.d(TAG, "Message data payload else: ${remoteMessage.data}")
-        }*/
 
         if (remoteMessage.data["image"] != null && remoteMessage.notification?.imageUrl == null) {
             val builder = NotificationCompat.Builder(this, channelId)
@@ -130,7 +127,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 .setSmallIcon(resId)
                 .setContentTitle(remoteMessage.notification?.title)
                 .setContentText(remoteMessage.notification?.body)
-                //.setContentText("https://www.google.com.ua/")
                 .setLargeIcon(smallIcon)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setAutoCancel(true)
@@ -220,16 +216,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     @SuppressLint("LongLogTag")
     override fun onNewToken(p0: String) {
+        Log.d(TAG, "Refreshed token: $p0")
+        val service = ApiHelper(RetrofitBuilder.apiService)
+        val pushCache = PushCache()
+
+        service.updateRegistrationId(p0)
+        pushCache.saveRegistrationIdPref(p0)
         //Log.d(TAG, "################ onNewToken##################: $p0")
         //super.onNewToken(p0)
-
-    }
-
-    private fun sendNotification() {
-
-    }
-
-    private fun sendNotificationWithImage() {
 
     }
 }

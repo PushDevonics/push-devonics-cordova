@@ -7,14 +7,14 @@ data class PushUser(
     @SerializedName("registration_id")
     private val registrationId: String,
 
-    @SerializedName("internal_id")
+    @SerializedName("uuid")
     private val internalId: String,
 
     @SerializedName("app_id")
     private val appId: String,
 
-    @SerializedName("platform_type")
-    private val platformType: String = "Android",
+    @SerializedName("platform_id")
+    private val platformId: Int = 1,
 
     private val country: String,
     private val language: String,

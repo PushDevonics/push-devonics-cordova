@@ -4,13 +4,12 @@ import com.google.gson.annotations.SerializedName
 
 data class Sender(
 
-    @SerializedName("sender_id")
-    private val senderId: String
+    @SerializedName("data")
+    val data: Data
 
-    /*@SerializedName("sender_id")
-    val senderId: String*/
 ) {
-    fun getSenderId(): String {
-        return senderId
+    @JvmName("getData1")
+    fun getData(): Data {
+        return data
     }
 }

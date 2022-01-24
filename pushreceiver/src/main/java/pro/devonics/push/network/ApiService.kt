@@ -10,32 +10,34 @@ interface ApiService {
 
     //1 Получаем sender_id, который используем для инициализации fcm
     @GET(VIEW)
-    fun getSenderId(@Path("app_id") app_id: String): Call<Sender>
+    fun getSenderId(@Path("uuid") uuid: String): Call<Sender>
 
     //2 Отсылаем запрос только при первом открытии приложения и сохраняем
-    //   registration_id в кеш, получаем internal_id
+    //   registration_id в кеш, отсылаем internal_id
     @POST(SUBSCRIBE_USER)
     fun createPush(@Body pushUser: PushUser): Call<Status>
 
     //3 Отсылаем каждый раз при открытии приложения
     @GET(SESSION)
-    fun createSession(@Path("registration_id") registrationId: String): Call<Status>//: Call<PushUser>
+    fun createSession(@Path("registrationId") registrationId: String): Call<Status>
 
     //4 Отсылаем при обновление fcm токена
-    @PUT(UPDATE_USER)
-    fun updateUser(@Body pushInstance: PushInstance): Call<PushInstance>//Response<Status>
+    @PATCH(UPDATE_USER)
+    fun updateUser(@Path("registrationId") registrationId: String): Call<Status>
 
-    // Отсылаем свои теги
-    @POST(SAVE_TAG)
-    fun saveCustomParams(@Body tag: Tag): Call<Tag>
+    //5 Отсылаем свои теги
+    @PATCH(SAVE_TAG)
+    fun saveCustomParams(@Path("registrationId") registrationId: String,
+                         @Body tag: Tag): Call<Status>
 
-    // Отсылаем продолжительность работы
-    @POST(DURATION)
-    fun sendDuration(@Body timeData: TimeData): Call<TimeData>
+    //6 Отсылаем продолжительность работы
+    @PATCH(DURATION)
+    fun sendDuration(@Path("registrationId") registrationId: String,
+                     @Body timeData: TimeData): Call<Status>
 
-    // Отсылаем переход по пушу
-    @POST(TRANSITION)
+    //7 Отсылаем переход по пушу
+    @PATCH(TRANSITION)
     fun createTransition(
-        @Path("registration_id") registrationId: String,
+        @Path("registrationId") registrationId: String,
         @Body  pushData: PushData): Call<Status>
 }

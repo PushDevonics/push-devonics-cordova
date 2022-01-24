@@ -8,7 +8,4 @@ data class Tag(
     private val key: String,
     @SerializedName("value")
     private val value: String,
-
-    @SerializedName("registration_id")
-    private val registrationId: String
 )

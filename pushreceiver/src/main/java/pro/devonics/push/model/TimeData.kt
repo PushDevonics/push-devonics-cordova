@@ -3,8 +3,7 @@ package pro.devonics.push.model
 import com.google.gson.annotations.SerializedName
 
 data class TimeData(
-    @SerializedName("registration_id")
-    private val registrationId: String,
-    @SerializedName("time")
+
+    @SerializedName("time_in_app")
     private val time: Long
 )
