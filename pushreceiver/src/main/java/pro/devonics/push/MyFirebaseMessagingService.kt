@@ -64,8 +64,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         intent?.putExtra("command", "transition")
 
         // Send pushData to intent
-        intent?.putExtra("push_type", remoteMessage.data["push_type"])
-        intent?.putExtra("push_id", remoteMessage.data["push_id"])
+        intent?.putExtra("sent_push_id", remoteMessage.data["sent_push_id"])
         intent?.putExtra("deeplink", remoteMessage.data["deeplink"])
 
         //Log.d(TAG, "push_type: ${remoteMessage.data["push_type"]}")

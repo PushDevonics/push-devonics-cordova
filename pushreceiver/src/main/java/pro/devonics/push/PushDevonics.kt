@@ -29,10 +29,10 @@ class PushDevonics(context: Context, appId: String) {
         if ("transition" == intent.getStringExtra("command")) {
 
             val bundle = intent.extras
-            val pushType = bundle?.get("push_type").toString()
-            val pushId = bundle?.get("push_id").toString()
-
-            val pushData = PushData(pushType, pushId)
+            //val pushType = bundle?.get("push_type").toString()
+            //val pushId = bundle?.get("push_id").toString()
+            val sentPushId = bundle?.get("sent_push_id").toString()
+            val pushData = PushData(sentPushId)
             createTransition(pushData)
             //Log.d(TAG, "sendIntent: pushData = $pushData")
             //Log.d(TAG, "pushType: $pushType")
