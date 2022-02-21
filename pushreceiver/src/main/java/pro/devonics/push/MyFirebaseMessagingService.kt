@@ -60,12 +60,13 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         //Log.d(TAG, "onMessageReceived packageName: $packageName")
 
         val intent = packageManager.getLaunchIntentForPackage(packageName)
-        intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent?.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
         intent?.putExtra("command", "transition")
 
         // Send pushData to intent
         intent?.putExtra("sent_push_id", remoteMessage.data["sent_push_id"])
         intent?.putExtra("deeplink", remoteMessage.data["deeplink"])
+        intent?.putExtra("open_url", remoteMessage.data["open_url"])
 
         //Log.d(TAG, "push_type: ${remoteMessage.data["push_type"]}")
         //Log.d(TAG, "push_id: ${remoteMessage.data["push_id"]}")

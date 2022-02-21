@@ -1,7 +1,10 @@
 package pro.devonics.push
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.util.Log
 import pro.devonics.push.DataHelper.Companion.createTransition
 import pro.devonics.push.DataHelper.Companion.startTime
 import pro.devonics.push.model.PushData
@@ -16,6 +19,8 @@ private const val TAG = "PushDevonics"
 class PushDevonics(context: Context, appId: String) {
 
     private val service = ApiHelper(RetrofitBuilder.apiService)
+
+    private val myContext = context
 
     init {
         AppContextKeeper.setContext(context)
@@ -37,6 +42,22 @@ class PushDevonics(context: Context, appId: String) {
             //Log.d(TAG, "sendIntent: pushData = $pushData")
             //Log.d(TAG, "pushType: $pushType")
             //Log.d(TAG, "pushId: $pushId")
+        }
+    }
+
+    fun openUrl(openUrl: String?) {
+        if (openUrl != null) {
+            val urlIntent = Intent()
+                .setAction(Intent.ACTION_VIEW)
+                .addCategory(Intent.CATEGORY_BROWSABLE)
+                .setData(Uri.parse(openUrl))
+
+            urlIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            try {
+                myContext.startActivity(urlIntent)
+            } catch (e: ActivityNotFoundException) {
+                Log.e(TAG, "ActivityNotFoundException $e")
+            }
         }
     }
 
