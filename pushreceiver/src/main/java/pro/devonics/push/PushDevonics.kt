@@ -19,17 +19,34 @@ private const val TAG = "PushDevonics"
 class PushDevonics(context: Context, appId: String) {
 
     private val service = ApiHelper(RetrofitBuilder.apiService)
-
     private val myContext = context
+    private val helperCache = HelperCache(context)
 
     init {
         AppContextKeeper.setContext(context)
         PushInitialization.run(appId)
         createInternalId()
         startTime()
+        startSession()
+        sendTransition()
     }
 
-    fun sendIntent(intent: Intent) {
+    private fun sendTransition() {
+
+        val sentPushId = helperCache.getSentPushId()
+        Log.d(TAG, "sendTransition: sentPushId = $sentPushId")
+        if (sentPushId == "" || sentPushId == null) {
+            return
+        }
+        val pushData = PushData(sentPushId)
+        createTransition(pushData)
+        Log.d(TAG, "sendTransition: pushData = $pushData")
+
+        helperCache.saveSentPushId("")
+
+    }
+
+    /*fun sendIntent(intent: Intent) {
 
         if ("transition" == intent.getStringExtra("command")) {
 
@@ -43,9 +60,15 @@ class PushDevonics(context: Context, appId: String) {
             //Log.d(TAG, "pushType: $pushType")
             //Log.d(TAG, "pushId: $pushId")
         }
-    }
+    }*/
 
-    fun openUrl(openUrl: String?) {
+    fun openUrl() {
+        val openUrl = helperCache.getOpenUrl()
+        if (openUrl == "") {
+            return
+        }
+        Log.d(TAG, "openUrl: openUrl = $openUrl")
+
         if (openUrl != null) {
             val urlIntent = Intent()
                 .setAction(Intent.ACTION_VIEW)
@@ -59,10 +82,30 @@ class PushDevonics(context: Context, appId: String) {
                 Log.e(TAG, "ActivityNotFoundException $e")
             }
         }
+        helperCache.saveOpenUrl("")
+    }
+
+    fun getDeeplink(): String {
+        val deep1 = helperCache.getDeeplink()
+        Log.d(TAG, "getDeeplink: deep1 = $deep1")
+        helperCache.saveDeeplink("")
+        return deep1.toString()
+    }
+
+    private fun createInternalId() {
+        val pushCache = PushCache()
+
+        var internalId = pushCache.getInternalIdFromPref()
+        if (internalId == null) {
+            val uuid = UUID.randomUUID()
+            internalId = uuid.toString()
+            pushCache.saveInternalId(internalId)
+        }
     }
 
     fun getInternalId(): String? {
         val pushCache = PushCache()
+        Log.d(TAG, "getInternalId: internalId = ${pushCache.getInternalIdFromPref()}")
         return pushCache.getInternalIdFromPref()
     }
 
@@ -105,18 +148,5 @@ class PushDevonics(context: Context, appId: String) {
         }
 
         //Log.d(TAG, "setTags: $key : $value")
-    }
-
-    private fun createInternalId() {
-        val pushCache = PushCache()
-
-        var internalId = pushCache.getInternalIdFromPref()
-        if (internalId == null) {
-            val uuid = UUID.randomUUID()
-            internalId = uuid.toString()
-            pushCache.saveInternalId(internalId)
-
-        }
-        //Log.d(TAG, "createInternalId(): internalId = $internalId")
     }
 }
