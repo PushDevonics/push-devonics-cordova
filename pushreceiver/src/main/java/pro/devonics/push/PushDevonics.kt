@@ -3,6 +3,7 @@ package pro.devonics.push
 import android.Manifest
 import android.app.Activity
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -94,7 +95,7 @@ class PushDevonics(activity: Activity, appId: String) {
         }
     }*/
 
-    fun openUrl() {
+    fun openUrl(context: Context) {
         val openUrl = helperCache.getOpenUrl()
         /*if (openUrl == "") {
             return
@@ -109,7 +110,7 @@ class PushDevonics(activity: Activity, appId: String) {
 
             urlIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             try {
-                myContext.startActivity(urlIntent)
+                context.startActivity(urlIntent)
             } catch (e: ActivityNotFoundException) {
                 Log.e(TAG, "openUrl: ActivityNotFoundException $e")
             } /*catch (e: MalformedURLException) {
