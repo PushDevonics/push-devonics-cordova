@@ -79,11 +79,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val intent = packageManager.getLaunchIntentForPackage(packageName)
         intent?.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
 
-        // Get image
-        /*val largeIcon = remoteMessage
-            .notification?.imageUrl.let { getBitmapFromUrl(it.toString()) }
-        val smallIcon = remoteMessage.notification?.icon.let { getBitmapFromUrl(it.toString()) }*/
-
         intent?.putExtra("command", "transition")
 
         // Send pushData to intent
@@ -91,27 +86,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         intent?.putExtra("deeplink", remoteMessage.data["deeplink"])
         intent?.putExtra("open_url", remoteMessage.data["open_url"])
 
-        //Log.d(TAG, "push_type: ${remoteMessage.data["push_type"]}")
-        //Log.d(TAG, "push_id: ${remoteMessage.data["push_id"]}")
-        //Log.d(TAG, "push_id: ${remoteMessage.data["push_id"]}")
-
-        /*val image = remoteMessage
-            .data["image"]?.let { getBitmapFromUrl(it) }
-
-        //get icon
-        val smallIcon = remoteMessage
-            .notification?.imageUrl?.let { getBitmapFromUrl(it.toString()) }*/
-
-        //Log.d(TAG, "image: $image")
-        //Log.d(TAG, "smallIcon: $smallIcon")
-
-        //Log.d(TAG, "image: ${remoteMessage.data["image"]}")
-        //Log.d(TAG, "smallIcon: ${remoteMessage.notification?.imageUrl}")
-
         val rnds = (1..1000).random()
         val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.getActivity(
-                this, rnds, intent, PendingIntent.FLAG_IMMUTABLE)
+                this, rnds, intent, PendingIntent.FLAG_MUTABLE)
         } else {
             PendingIntent.getActivity(
                 this, rnds, intent, PendingIntent.FLAG_ONE_SHOT)

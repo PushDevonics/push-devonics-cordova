@@ -100,8 +100,8 @@ class PushDevonics(activity: Activity, appId: String) {
         val openUrl = helperCache.getOpenUrl()
         /*if (openUrl == "") {
             return
-        }*/
-        Log.d(TAG, "openUrl: openUrl = $openUrl")
+        }
+        Log.d(TAG, "openUrl: openUrl = $openUrl")*/
 
         if (openUrl != null) {
             val urlIntent = Intent()
