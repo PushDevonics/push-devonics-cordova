@@ -47,7 +47,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             super.handleIntent(intent)//if app close
             //Log.d(TAG, "handleIntent e: $e")
         } catch (e: MalformedURLException) {
-
+            Log.d(TAG, "handleIntent: MalformedURLException $e")
         }
     }
 
