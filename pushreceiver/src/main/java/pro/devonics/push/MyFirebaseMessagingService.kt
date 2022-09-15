@@ -45,8 +45,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             }
         } catch (e: Exception) {
             super.handleIntent(intent)//if app close
-            //Log.d(TAG, "handleIntent e: $e")
+            Log.d(TAG, "handleIntent: Exception $e")
         } catch (e: MalformedURLException) {
+            super.handleIntent(intent)
             Log.d(TAG, "handleIntent: MalformedURLException $e")
         }
     }
@@ -89,9 +90,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         //intent?.putExtra("command", "transition")
 
         // Send pushData to intent
-        //intent?.putExtra("sent_push_id", remoteMessage.data["sent_push_id"])
-        //intent?.putExtra("deeplink", remoteMessage.data["deeplink"])
-        //intent?.putExtra("open_url", remoteMessage.data["open_url"])
+        intent?.putExtra("sent_push_id", remoteMessage.data["sent_push_id"])
+        intent?.putExtra("deeplink", remoteMessage.data["deeplink"])
+        intent?.putExtra("open_url", remoteMessage.data["open_url"])
 
         //Log.d(TAG, "push_type: ${remoteMessage.data["push_type"]}")
         //Log.d(TAG, "push_id: ${remoteMessage.data["push_id"]}")
