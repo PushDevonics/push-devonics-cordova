@@ -24,7 +24,7 @@ class HelperCache(context: Context) {
             .getString(SENT_PUSH_ID, null)
     }
 
-    fun saveOpenUrl(openUrl: String) {
+    fun saveOpenUrl(openUrl: String?) {
         ed?.putString(OPEN_URL, openUrl)
         ed?.apply()
     }

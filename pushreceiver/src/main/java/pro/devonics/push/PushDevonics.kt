@@ -95,9 +95,9 @@ class PushDevonics(activity: Activity, appId: String) {
 
     fun openUrl() {
         val openUrl = helperCache.getOpenUrl()
-        if (openUrl == "") {
+        /*if (openUrl == "") {
             return
-        }
+        }*/
         Log.d(TAG, "openUrl: openUrl = $openUrl")
 
         if (openUrl != null) {
@@ -113,7 +113,7 @@ class PushDevonics(activity: Activity, appId: String) {
                 Log.e(TAG, "ActivityNotFoundException $e")
             }
         }
-        helperCache.saveOpenUrl("")
+        helperCache.saveOpenUrl(null)
     }
 
     fun getDeeplink(): String {
