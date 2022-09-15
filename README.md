@@ -1,5 +1,6 @@
 [![Release](https://jitpack.io/v/PushDevonics/push-devonics-cordova.svg)](https://jitpack.io/#PushDevonics/push-devonics-cordova)
 
+Attention to use this library, you must update the SDK to version 33
 
 Install Plugin:
 

@@ -13,7 +13,7 @@ class HelperCache(context: Context) {
         .getSharedPreferences(HELPER_CACHE, Context.MODE_PRIVATE)
         ?.edit()
 
-    fun saveSentPushId(sentPushId: String) {
+    fun saveSentPushId(sentPushId: String?) {
         ed?.putString(SENT_PUSH_ID, sentPushId)
         ed?.apply()
     }
