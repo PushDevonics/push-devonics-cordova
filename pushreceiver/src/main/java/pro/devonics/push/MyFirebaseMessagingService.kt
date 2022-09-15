@@ -87,7 +87,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             .notification?.imageUrl.let { getBitmapFromUrl(it.toString()) }
         val smallIcon = remoteMessage.notification?.icon.let { getBitmapFromUrl(it.toString()) }
 
-        //intent?.putExtra("command", "transition")
+        intent?.putExtra("command", "transition")
 
         // Send pushData to intent
         intent?.putExtra("sent_push_id", remoteMessage.data["sent_push_id"])
@@ -122,7 +122,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         val channelId = "Default"
 
-        if (remoteMessage.notification?.imageUrl != null && remoteMessage.notification?.icon == null) {
+        if (remoteMessage.notification?.imageUrl != null
+            && remoteMessage.notification?.icon == null && remoteMessage.notification != null) {
             val builder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(resId)
                 .setContentTitle(remoteMessage.notification?.title)
@@ -149,7 +150,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             notificationManager.notify(0, builder.build())
         }
 
-        if (remoteMessage.notification?.imageUrl != null && remoteMessage.notification?.icon != null) {
+        if (remoteMessage.notification?.imageUrl != null
+            && remoteMessage.notification?.icon != null && remoteMessage.notification != null) {
             val builder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(resId)
                 .setContentTitle(remoteMessage.notification?.title)
@@ -176,7 +178,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             notificationManager.notify(0, builder.build())
         }
 
-        if (remoteMessage.notification?.imageUrl == null && remoteMessage.notification?.icon != null) {
+        if (remoteMessage.notification?.imageUrl == null
+            && remoteMessage.notification?.icon != null && remoteMessage.notification != null) {
             val builder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(resId)
                 .setContentTitle(remoteMessage.notification?.title)
@@ -200,7 +203,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
 
         if (remoteMessage.notification?.imageUrl == null
-            && remoteMessage.notification?.icon == null) {
+            && remoteMessage.notification?.icon == null
+            && remoteMessage.notification != null && remoteMessage.data != null) {
             val builder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(resId)
                 .setContentTitle(remoteMessage.notification?.title)
