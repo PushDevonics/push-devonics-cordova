@@ -15,6 +15,7 @@ import pro.devonics.push.model.PushData
 import pro.devonics.push.model.TimeData
 import pro.devonics.push.network.ApiHelper
 import pro.devonics.push.network.RetrofitBuilder
+import java.net.MalformedURLException
 import java.util.*
 
 
@@ -110,7 +111,10 @@ class PushDevonics(activity: Activity, appId: String) {
             try {
                 myContext.startActivity(urlIntent)
             } catch (e: ActivityNotFoundException) {
-                Log.e(TAG, "ActivityNotFoundException $e")
+                Log.e(TAG, "openUrl: ActivityNotFoundException $e")
+            } catch (e: MalformedURLException) {
+
+                Log.d(TAG, "openUrl: MalformedURLException $e")
             }
         }
         helperCache.saveOpenUrl(null)

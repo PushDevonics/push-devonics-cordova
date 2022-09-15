@@ -48,6 +48,7 @@ dependencies {
 
     // Firebase
     implementation 'com.google.firebase:firebase-messaging-ktx:23.0.8'
+    implementation 'androidx.work:work-runtime:2.8.0-alpha04'
     //implementation platform('com.google.firebase:firebase-bom:28.3.1')
     //implementation 'com.google.firebase:firebase-analytics-ktx'
     //implementation 'com.google.firebase:firebase-messaging-ktx'
