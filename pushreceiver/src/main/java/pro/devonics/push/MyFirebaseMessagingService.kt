@@ -18,6 +18,7 @@ import com.google.firebase.messaging.RemoteMessage
 import pro.devonics.push.network.ApiHelper
 import pro.devonics.push.network.RetrofitBuilder
 import java.net.HttpURLConnection
+import java.net.MalformedURLException
 import java.net.URL
 
 
@@ -45,6 +46,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         } catch (e: Exception) {
             super.handleIntent(intent)//if app close
             //Log.d(TAG, "handleIntent e: $e")
+        } catch (e: MalformedURLException) {
+
         }
     }
 
