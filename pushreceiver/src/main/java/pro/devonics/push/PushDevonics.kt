@@ -113,7 +113,6 @@ class PushDevonics(activity: Activity, appId: String) {
             } catch (e: ActivityNotFoundException) {
                 Log.e(TAG, "openUrl: ActivityNotFoundException $e")
             } catch (e: MalformedURLException) {
-
                 Log.d(TAG, "openUrl: MalformedURLException $e")
             }
         }
