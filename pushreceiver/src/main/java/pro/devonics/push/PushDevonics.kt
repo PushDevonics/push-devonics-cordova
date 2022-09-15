@@ -37,6 +37,7 @@ class PushDevonics(activity: Activity, appId: String) {
         startSession()
         sendTransition(service)
         askNotificationPermission()
+        openUrl(myContext)
     }
 
     private fun askNotificationPermission() {
