@@ -46,10 +46,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         } catch (e: Exception) {
             super.handleIntent(intent)//if app close
             Log.d(TAG, "handleIntent: Exception $e")
-        } /*catch (e: MalformedURLException) {
-            super.handleIntent(intent)
-            Log.d(TAG, "handleIntent: MalformedURLException $e")
-        }*/
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -77,7 +74,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         //Log.d(TAG, "onMessageReceived packageName: $packageName")
 
         val intent = packageManager.getLaunchIntentForPackage(packageName)
-        intent?.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
 
         intent?.putExtra("command", "transition")
 

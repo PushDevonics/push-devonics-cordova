@@ -37,7 +37,7 @@ class PushDevonics(activity: Activity, appId: String) {
         startSession()
         sendTransition(service)
         askNotificationPermission()
-        openUrl(myContext)
+        //openUrl(myContext)
     }
 
     private fun askNotificationPermission() {
@@ -96,7 +96,7 @@ class PushDevonics(activity: Activity, appId: String) {
         }
     }*/
 
-    fun openUrl(context: Context) {
+    fun openUrl() {
         val openUrl = helperCache.getOpenUrl()
         /*if (openUrl == "") {
             return
@@ -111,12 +111,10 @@ class PushDevonics(activity: Activity, appId: String) {
 
             urlIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             try {
-                context.startActivity(urlIntent)
+                myContext.startActivity(urlIntent)
             } catch (e: ActivityNotFoundException) {
                 Log.e(TAG, "openUrl: ActivityNotFoundException $e")
-            } /*catch (e: MalformedURLException) {
-                Log.d(TAG, "openUrl: MalformedURLException $e")
-            }*/
+            }
         }
         helperCache.saveOpenUrl(null)
     }
